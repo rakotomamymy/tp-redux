@@ -1,33 +1,33 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  decrement,
-  increment,
-  selectCount,
-} from './counterSlice';
+  remove,
+  add,
+  selectItems,
+} from './itemsSlice';
 
-export function Counter() {
+export function Itmes() {
 
   let itemId = 0;
 
-  const count = useSelector(selectCount);
+  const itemList = useSelector(selectItems);
   const dispatch = useDispatch();
   const [newItem, setNewItem] = useState("");
 
   const onAddNewItem = () => {
-    dispatch(increment(newItem));
+    dispatch(add(newItem));
     setNewItem("");
   }
   
   const onRemoveItem = item => {
-    dispatch(decrement(item));
+    dispatch(remove(item));
   }
 
   return (
     <div>
       <div>
         {
-          count.map(item => 
+          itemList.map(item => 
             <div key={itemId++}>
               <span>{item}</span> <button onClick={() => onRemoveItem(item)}> Remove </button>
             </div>)
